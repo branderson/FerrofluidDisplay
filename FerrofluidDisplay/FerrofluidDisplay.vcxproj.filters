@@ -27,6 +27,9 @@
     <ClInclude Include="ServoModule.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Pins.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Display.cpp">

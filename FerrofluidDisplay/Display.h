@@ -9,10 +9,18 @@
 	#include "WProgram.h"
 #endif
 
+#include "ServoModule.h"
+
 class Display
 {
 private:
 	ServoModule _servos[16];
+	bool _servoStates[16];
+
+	/*
+	 * Set all pixels to off position without altering internal states
+	 */
+	void ClearDisplayInternal();
 
 public:
 	/* 

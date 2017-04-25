@@ -4,38 +4,27 @@
  Author:	Brad
 */
 #include <Servo.h>
-#include "ServoModule.h"
+#include "Pins.h"
 #include "Display.h"
-
-// Pin definitions
-#define ON_PIN 7 // ATmega328p pin 13
-// ServoModule select pins
-#define S1_PIN 0 // ATmega328p pin 2
-#define S2_PIN 1 // ATmega328p pin 3
-#define S3_PIN 2 // ATmega328p pin 4
-#define S4_PIN 3 // ATmega328p pin 5
-#define S5_PIN 4 // ATmega328p pin 6
-// PWM pins
-#define PWM_OFF_PIN 9 // ATmega328p pin 15 
-#define PWM_ON_PIN 10 // ATmega328p pin 16
-
-// PWM Configuration
-#define ON_WIDTH 1333 // Range of values is 1000us to 2000us, so 60 degrees from 1000 should be 1333us
-#define OFF_WIDTH 1666 // 120 degrees should be 1666us
 
 Display display;
 Servo offPWM;
 Servo onPWM;
 
+void SetAll();
+
 // the setup function runs once when you press reset or power the board
 void setup() {
 	// Configure pins
+	pinMode(8, OUTPUT);
 	pinMode(ON_PIN, OUTPUT);
 	pinMode(S1_PIN, OUTPUT);
 	pinMode(S2_PIN, OUTPUT);
 	pinMode(S3_PIN, OUTPUT);
 	pinMode(S4_PIN, OUTPUT);
 	pinMode(S5_PIN, OUTPUT);
+	pinMode(PWM_OFF_PIN, OUTPUT);
+	pinMode(PWM_ON_PIN, OUTPUT);
 
 	// Configure PWMs
 	offPWM.attach(9);
@@ -43,10 +32,70 @@ void setup() {
 	offPWM.writeMicroseconds(OFF_WIDTH);
 	onPWM.writeMicroseconds(ON_WIDTH);
 
+	Serial.end();
+
 	display.ClearDisplay();
+	digitalWrite(S1_PIN, LOW);
+	digitalWrite(S2_PIN, LOW);
+	digitalWrite(S3_PIN, LOW);
+	digitalWrite(S4_PIN, LOW);
+	digitalWrite(S5_PIN, LOW);
 }
 
 // the loop function runs over and over again until power down or reset
 void loop() {
-  
+//	delay(1000);
+//	display.SetServo(0, true);
+//	delay(1000);
+//	for (int i = 0; i < 1000; i++)
+//	{
+//		display.SetServo(0, false);
+//	}
+
+	delay(1000);
+	display.ClearDisplay();
+	delay(1000);
+//	display.SetServo(3, false);
+	display.SetServo(0, true);
+	delay(1000);
+//	display.ClearDisplay();
+//	display.SetServo(0, false);
+	display.SetServo(1, true);
+	delay(1000);
+//	display.ClearDisplay();
+//	display.SetServo(1, false);
+	display.SetServo(2, true);
+	delay(1000);
+//	display.ClearDisplay();
+//	display.SetServo(2, false);
+	display.SetServo(3, true);
+	delay(1000);
+	display.SetServo(3, false);
+	delay(1000);
+	display.SetServo(3, true);
+	delay(1000);
+	display.SetServo(3, false);
+
+//	delay(2000);
+//	display.SetServo(0, false);
+//	digitalWrite(ON_PIN, HIGH);
+////	digitalWrite(8, LOW);
+//	digitalWrite(S3_PIN, HIGH);
+//	delay(100);
+//	digitalWrite(S3_PIN, LOW);
+//	delay(2000);
+////	display.SetServo(0, true);
+//	digitalWrite(ON_PIN, LOW);
+////	digitalWrite(8, HIGH);
+//	digitalWrite(S3_PIN, HIGH);
+//	delay(100);
+//	digitalWrite(S3_PIN, LOW);
+}
+
+void SetAll()
+{
+	for (int i = 0; i < 16; i++)
+	{
+		display.SetServo(i, true);
+	}
 }

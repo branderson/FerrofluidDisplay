@@ -2,7 +2,15 @@
 // 
 // 
 
+#include "Pins.h"
 #include "ServoModule.h"
+
+ServoModule::ServoModule()
+{
+	_index = 0;
+	_state = false;
+}
+
 
 ServoModule::ServoModule(uint8_t index)
 {
@@ -22,8 +30,6 @@ void ServoModule::SetState(bool on)
 
 	// Set select pin values
 	SelectServo(_index);
-
-	// TODO: Possible sleep here for a bit?
 
 	// Deselect servo
 	SelectServo(-1);

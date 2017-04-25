@@ -22,6 +22,8 @@ private:
 	static void SelectServo(uint8_t index);
 
 public:
+	ServoModule();
+
 	/*
 	 * Construct a servo with the given index
 	 * index: index of servo to construct
